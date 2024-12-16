@@ -1,43 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import RecipeCard from "./RecipeCard"
-import SearchCard from "./SearchCard"
-import "../css/components-css/RecipeContainer.css"
+//import SearchCard from "./SearchCard"
+import "../css/components-css/RecipeContainer.css" 
+import { useRecipes } from '../context/RecipesContext'
+import AppContext from './context/AppContext'
 
 const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelected  }) => {
     const [recipesSearched, setRecipesSearched] = useState({
         name: '',
         img: ''
     })
-
-    const [recipesByCategory,setRecipesByCategory] = useState([])
-    
-    // console.log(CategorySelected)
+    const { isMenu, setIsMenu } = useContext(AppContext)
+ 
+    const [recipesId, setRecipesId] = useState([]);
+    const { recipes, getRecipesByCategory, getRecipeByName }= useRecipes(); 
 
     useEffect(() => {
+        if (isMenu) {
+            setIsMenu(true)
+        }
         if (recipeSearch === '') {
             setRecipesSearched({
                 name: '',
                 img: ''
-            })
-        } else {
+            });
+            setRecipesId([]);
+        } else { 
             const getRecipeSearched = async () => {
-                try {
-                    const res = await fetch(`http://localhost:4000/api/recipeInfo/${recipeSearch}`)
-                    const data = await res.json()
-                    const { id, strMeal, strMealThumb } = data
-                    setRecipesSearched({
-                        id,
+                const recipe = await getRecipeByName(recipeSearch);
+                const { strMeal, strMealThumb } = recipe;
+                    setRecipesSearched({ 
                         name: strMeal,
                         img: strMealThumb
-                    })
-                } catch (error) {
-                    console.error(error)
-                }
-            }
+                    });
+            } 
 
             const handleEnter = (e) => {
                 if (e.key === 'Enter') {
-                    getRecipeSearched()
+                    getRecipeSearched() 
                 }
             }
 
@@ -48,76 +48,52 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
             }
         }
 
-
-
-    }, [recipeSearch])
-
+    }, [recipeSearch]);
 
     useEffect(() => {
-        if(CategorySelected !== 'All'){
-            const getRecipesByCategorie = async () => {
-                try {
-                    const res = await fetch(`http://localhost:4000/api/recipesCategories/${CategorySelected}`)
-                    const data = await res.json()
-                    // recipesByCategory = data
-                    setRecipesByCategory(data)
-                    
-                    
-                } catch (error) {
-                    console.error(error)
-                }
-                
-            }
-            getRecipesByCategorie()
-        }
-        
-    }, [CategorySelected])
+        getRecipesByCategory(CategorySelected, recipesId);
+    }, [CategorySelected, recipesId]); 
     
+    useEffect(() => {
+        if (recipeSearch === '' && CategorySelected === 'All') {
+            const recipesIdList = ['52978', '53049', '53071', '52855', '52776', '52785', '52907', '52791', '52802'];
+            setRecipesId(recipesIdList);
+        } else {
+            setRecipesId([]);
+        }
+    }, [recipeSearch, CategorySelected]); 
 
     //Return Render
     if (recipeSearch === '' && CategorySelected === 'All') {
-        const NameRecipes = ['Kumpir', 'apam', 'asado', 'banana', 'gateau', 'fry', 'confit', 'eton', 'fish pie']
-        
+        //const NameRecipes = ['Kumpir', 'apam', 'asado', 'banana', 'gateau', 'fry', 'confit', 'eton', 'fish pie'] 
         return (
             <main className='recipes-container'>
-                {NameRecipes.map((name, index) => (
+                {
+                //recipesId.map((name, index) => (
+                recipes.map((recipe) => (
                     <RecipeCard
-                        key={index}
-                        name={name}
+                        key={recipe.id}
+                        recipe={recipe}
                     />
                 ))}
             </main>
         )
-    } else if (recipeSearch !== ''){
-        
-        setCategorySelected('All')
-
+    } else if (recipeSearch !== '') { 
+        setCategorySelected('All'); 
         return (
-            <main className='recipes-container'>
-                <SearchCard
-                    name={recipesSearched.name}
-                    img={recipesSearched.img}
-                    id={recipesSearched.id}
-                />
+            <main className='recipes-container'> 
+                <RecipeCard recipe={recipesSearched}/> 
             </main>
         )
-    }else {
+    }else { 
         return (
             <main className='recipes-container'>
-                {recipesByCategory.map((o, index) => (
-                    <SearchCard
-                        key={index}
-                        name={o.name}
-                        img={o.img}
-                        id={o.id}
-                    />
+                {recipes.map((o, index) => ( 
+                    <RecipeCard key={index} recipe={o}/> 
                 ))}
             </main>
         )
     }
 }
 
-export default RecipeContainer
-
-
-
+export default RecipeContainer;

@@ -9,6 +9,7 @@ export const useAuth = () => {
   if (!context) throw new Error("useAuth must be used within a AuthProvider");
   return context;
 };
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -81,6 +82,7 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data);
         setLoading(false);
       } catch (error) {
+        console.log(error);
         setIsAuthenticated(false);
         setLoading(false);
       }
@@ -142,4 +144,4 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-export default AuthContext; 
+//export default AuthContext; 

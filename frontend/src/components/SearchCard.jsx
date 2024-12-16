@@ -1,3 +1,4 @@
+/*
 import { Link } from 'react-router-dom'
 import "../css/components-css/RecipeCard.css"
 import { useFavorites } from '../context/FavoritesContext'
@@ -5,9 +6,9 @@ import { useFavorites } from '../context/FavoritesContext'
 const RecipeSearch = ({id, name, img}) => {
 
   const {favorites, addFavorite, deleteFavorite} = useFavorites();
-  console.log(favorites);
+  //console.log(favorites);
   const favoritesId = favorites.map(recipe=>recipe.id);
-  console.log(favoritesId);
+  //console.log(favoritesId);
 
 
 
@@ -39,3 +40,4 @@ const RecipeSearch = ({id, name, img}) => {
 }
 
 export default RecipeSearch
+*/

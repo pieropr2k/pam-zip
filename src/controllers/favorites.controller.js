@@ -11,7 +11,7 @@ export const createFavoriteRecipe = async (req, res) => {
         //const formattedFavorite = { ...favoriteRecipe, user_id: req.user.id }; // Suponiendo que el `user_id` viene del token del usuario
         await FavoriteRecipesModel.create(formattedFavorite);
         const fav_info = await getRecipeInfo(recipe_id);
-        if (fav_info) {
+        if (!fav_info) {
             return res.status(401).json({ message: "No meal found with the given ID"});
         }
         //console.log(fav_info, "fav info endpoint")

@@ -9,6 +9,39 @@
     gap: 20px;
 }
 
+.back-link {
+    color: rgb(240, 156, 184); /* Indigo para el texto */
+    padding: 0.25rem 0.5rem; /* Espaciado adicional */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 1rem; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    display: inline-flex; /* Para alinear la flecha y el texto */
+    border: 2px solid transparent; /* Borde inicial transparente */
+    align-items: center; /* Alinea verticalmente la flecha y el texto */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.back-link::before {
+    content: "←"; /* Flecha hacia la izquierda */
+    margin-right: 0.5rem; /* Espaciado entre la flecha y el texto */
+    font-size: 1rem; /* Tamaño de la flecha */
+    color: rgb(240, 156, 184); /* Color de la flecha */
+    transition: all 0.3s ease; /* Suavidad en el hover */
+}
+
+/* Hover */
+.back-link:hover {
+    color: white; /* Texto blanco */
+    background-color: #4f46e5; /* Fondo indigo */
+    border-radius: 0.375rem; /* Bordes redondeados */
+    border: 2px solid rgb(240, 156, 184);
+}
+
+.back-link:hover::before {
+    color: white; /* Cambiar el color de la flecha a blanco */
+}
+
+
 
 @media (max-width: 1000px) {
     .recipes-container{

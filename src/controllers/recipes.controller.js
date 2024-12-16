@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getRecipeInfoById = async (req, res) => {
+export const getInfoById = async (req, res) => {
     const { id } = req.params;
     try {
         //const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
@@ -8,7 +8,7 @@ export const getRecipeInfoById = async (req, res) => {
         
         const meal = response.data.meals[0];
         //console.log(response.data);
-        const {strArea, strMeal, strMealThumb, strInstructions, strYoutube} = meal;
+        const {strArea, strMeal, strMealThumb, strInstructions, strYoutube} = meal; 
         if (!meal) {
             return res.status(400).json({ error: "Recipe not found" });
         }
@@ -33,7 +33,7 @@ export const getRecipeInfoById = async (req, res) => {
 };
 
 
-export const getRecipeInfo = async(req,res) => {
+export const getRecipeByName = async(req,res) => {
     const {name} = req.params
     
     try {
@@ -42,9 +42,7 @@ export const getRecipeInfo = async(req,res) => {
 
         if (!data.meals || data.meals.length === 0) {
             return res.status(401).json({ message: "No meal found with the given ID"});
-        }
-
-
+        } 
         const { strMeal, strMealThumb } = data.meals[0]
         return res.json({ strMeal, strMealThumb })
 
@@ -54,6 +52,7 @@ export const getRecipeInfo = async(req,res) => {
 
 }
 
+/*
 export const getAllInfo = async (req, res) => {
     const { nameRecipe } = req.params
 
@@ -89,6 +88,7 @@ export const getAllInfo = async (req, res) => {
         console.error(error)
     }
 }
+*/
 
 export const getCategory = async (req, res) => {
     const {category} = req.params

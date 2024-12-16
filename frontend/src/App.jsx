@@ -13,69 +13,83 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx'
 import { ProtectedRoute } from "./routes.jsx"
 import { FavoritesProvider } from './context/FavoritesContext.jsx'
 import FavoritesPage from './pages/FavoritesPage.jsx'
+import { RecipesProvider } from './context/RecipesContext.jsx'
+import { Navbar } from './components/Navbar.jsx'
 
 const App = () => {
   const [CategorySelected, setCategorySelected] = useState("All")
   const { formState, onInputChange } = useForm({ recipe: '' })
+  //const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
 
   const ShowNavbar = () => {
     //const location = useLocation();
     //const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+    
     const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
-    return isAuthenticated ? null : <p>nab</p>
-    //<Navbar />;
+    return isAuthenticated ? null : (<Navbar/>);
+    
   }
+
+  const ShowSideMenu = () => {
+    const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+
+    return isAuthenticated ? (<SideMenu
+      CategorySelected={CategorySelected}
+      setCategorySelected={setCategorySelected}
+    />) : null;
+  }
+
+  /*
+  const AuthClass = () => {
+    const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+    return isAuthenticated;
+  }
+  */
 
   return (
     <AuthProvider>
-      <AppState>
-        <FavoritesProvider>
-          <ShowNavbar />
-          <Router>
-            <div className='app-container'>
+      <RecipesProvider>
+        <AppState>
+          <FavoritesProvider> 
+            <Router>
+              <div className={'app-container'}> 
+                <ShowNavbar />
+                <ShowSideMenu/>
+                <div className="main-container">
+                  <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route element={<ProtectedRoute />}> 
+                      <Route
+                        path='/'
+                        element={
+                          <>
+                            <div className="">
+                              <Search
+                                formState={formState}
+                                onInputChange={onInputChange}
+                              />
 
-              <div className="main-container">
-                <Routes>
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                  <Route element={<ProtectedRoute />}>
+                              <RecipeContainer
+                                recipeSearch={formState.recipe}
+                                CategorySelected={CategorySelected}
+                                setCategorySelected={setCategorySelected}
+                              />
+                            </div>
+                          </>
+                        }
+                      />
+                      <Route path='/:id' element={<RecipeViewer />} />
+                      <Route path="/favorites" element={<FavoritesPage />} />
+                    </Route>
 
-                    <Route
-                      path='/'
-                      element={
-                        <>
-                          <SideMenu
-                            CategorySelected={CategorySelected}
-                            setCategorySelected={setCategorySelected}
-                          />
-                          <div className="main-container">
-                            <Search
-                              formState={formState}
-                              onInputChange={onInputChange}
-                            />
-
-                            <RecipeContainer
-                              recipeSearch={formState.recipe}
-                              CategorySelected={CategorySelected}
-                              setCategorySelected={setCategorySelected}
-                            />
-                          </div>
-                        </>
-                      }
-                    />
-                    <Route path='/recipe/:name' element={<RecipeViewer />} />
-                    
-                  <Route path="/favorites" element={<FavoritesPage/>} />
-
-
-                  </Route>
-
-                </Routes>
+                  </Routes>
+                </div>
               </div>
-            </div>
-          </Router>
-        </FavoritesProvider>
-      </AppState>
+            </Router>
+          </FavoritesProvider>
+        </AppState>
+      </RecipesProvider>
     </AuthProvider>
   )
 }

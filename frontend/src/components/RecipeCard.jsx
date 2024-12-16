@@ -1,43 +1,37 @@
-import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import "../css/components-css/RecipeCard.css"
+import "../css/components-css/RecipeCard.css" 
+import { useFavorites } from '../context/FavoritesContext'
 
-const RecipeCard = ({name}) => {
-  const [recipes, setRecipes] = useState({
-    name: '',
-    img: ''
-  })
+const RecipeCard = ({ recipe }) => {
+  console.log(recipe);
+  const {id, name, img} = recipe;
+  const { favorites, addFavorite, deleteFavorite } = useFavorites();
+  //console.log(favorites);
+  const favoritesId = favorites.map((recipe)=>recipe.id);
+  //console.log(favoritesId)
 
-  const getRecipesInfo= async () => {
-    try {
-      const res = await fetch(`http://localhost:4000/api/recipeInfo/${name}`)
-      const data = await res.json()
-      const {strMeal, strMealThumb} = data
-      setRecipes({
-        name: strMeal,
-        img: strMealThumb
-      })
-
-    } catch (error) {
-      console.error(error)
+  const handleAddFavorite = () => { 
+    if (favoritesId.includes(id)) {
+      deleteFavorite(id); 
+    } else {
+      addFavorite(id);
     }
-  }
-
-  useEffect(() => {
-    getRecipesInfo()
-  }, [])
+  };
 
   return (
     <div className='card-container'>
         <div className='header-card'>
-            <p>{recipes.name}</p>
-            <Link to={`/recipe/${recipes.name}`}>
+            <p>{name}</p>
+            <Link to={`/${id}`}>
               <button>view</button>
             </Link>
         </div>
 
-        <img src={recipes.img} alt="" />
-        <button onClick={null}>Add to Favorites</button>
+        <img src={img} alt={name} /> 
+        <button onClick={handleAddFavorite}>{
+          !favoritesId.includes(id) ? "Add to Favorites" : "Delete from Favorites"
+        }</button>
+
     </div>
   )
 }

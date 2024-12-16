@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import AppContext from '../components/context/AppContext'
 import "../css/components-css/SideMenu.css"
 import { useAuth } from '../context/AuthContext'
@@ -33,10 +33,17 @@ const SideMenu = ({ CategorySelected, setCategorySelected }) => {
             {category}
           </li>
         ))}
-        <Link to={'/favorites'}><li>Favorites</li></Link>
+        <hr className="separator"/>
+        <li className='favorites'>
+          <Link to={'/favorites'}>
+            Favorites
+          </Link>
+        </li>
         
       </ul>
-      <button onClick={logout}>Logout</button>
+      <div className='logout'>
+        <button onClick={logout}>Logout</button>
+      </div> 
     </aside>
   )
 }

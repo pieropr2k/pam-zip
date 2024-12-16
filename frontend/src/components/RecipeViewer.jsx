@@ -1,13 +1,16 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import AppContext from '../components/context/AppContext'
 import '../css/components-css/RecipeViewer.css'
+import { useRecipes } from '../context/RecipesContext'
 
 const RecipeViewer = () => {
   const { isMenu, setIsMenu } = useContext(AppContext)
+  const { getOneRecipe } = useRecipes();
 
-  const { name } = useParams()
+  const { id } = useParams()
   const [recipeData, setrecipeData] = useState({
+    name: '',
     instrucciones: '',
     youtube: '',
     ingredientes: '',
@@ -15,10 +18,11 @@ const RecipeViewer = () => {
   })
 
   useEffect(() => {
+    setIsMenu(false)
+    getAllinfo()
     if (isMenu) {
       setIsMenu(false)
     }
-
     getAllinfo()
     return () => {
       setIsMenu(true)
@@ -26,27 +30,23 @@ const RecipeViewer = () => {
   }, [])
 
   const getAllinfo = async () => {
-    try {
-      const res = await fetch(`http://localhost:4000/api/allInfo/${name}`)
-      const data = await res.json()
-
-      const { instructions, youtubeLink, ingredients, img } = data
-      setrecipeData({
-        instrucciones: instructions,
-        youtube: youtubeLink,
-        ingredientes: ingredients,
-        img: img
-      })
-
-      console.log(recipeData)
-    } catch (error) {
-      console.error(error)
-    }
+    const {name, instructions, ytLink, ingredients, img} = await getOneRecipe(id); 
+    console.log({name, instructions, ytLink, ingredients, img});
+    setrecipeData({
+      name: name,
+      instrucciones: instructions,
+      youtube: ytLink,
+      ingredientes: ingredients,
+      img: img
+    });  
   }
 
   return (
     <div className="recipe-container">
-      <h1 className="mark">{name}</h1>
+      <p>
+        <Link to='/' className='back-link'>Volver</Link>
+      </p>
+      <h1 className="mark">{recipeData.name}</h1>
 
       <div className="recipe-container">
         <img src={recipeData.img} alt="" />
@@ -73,7 +73,7 @@ const RecipeViewer = () => {
           <iframe
             width="560"
             height="315"
-            src={`https://www.youtube.com/embed/${recipeData.youtube.split("v=")[1]}`}
+            src={`https://www.youtube.com/embed/${recipeData.youtube ? recipeData.youtube.split("v=")[1] : " "}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen>
