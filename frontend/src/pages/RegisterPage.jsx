@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../context/authContext"; 
+import { useAuth } from "../context/AuthContext"; 
 import "../css/components-css/AuthForms.css";
 
 const RegisterPage = () => {
