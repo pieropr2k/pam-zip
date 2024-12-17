@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../schemas/auth";
-//import "../css/AuthForms.css";
+import "../css/components-css/AuthForms.css";
 
 const LoginPage = () => {
   const {
@@ -26,25 +26,25 @@ const LoginPage = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="forms flex items-center justify-center">
-      <div className="bg-white shadow-md rounded p-6 w-full max-w-md">
+    <div className="login-container">
+      <div className="login-box">
         {error && (
-          <div className="bg-red-100 text-red-500 p-2 mb-4 rounded">
+          <div className="error-message">
             {error}
           </div>
         )}
-        <h1 className="text-2xl font-bold mb-6">Entrar</h1>
+        <h1 className="">Entrar</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="label">
               Email:
             </label>
             <input
               type="email"
               name="email"
               id="email"
-              placeholder="youremail@domain.tld"
-              className="w-full px-3 py-2 border rounded"
+              placeholder="youremail@gmail.com"
+              className="input"
               {...register("email", { required: true })}
             />
             {errors.email?.message && (
@@ -54,7 +54,7 @@ const LoginPage = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium mb-2"
+              className="label"
             >
               Contraseña:
             </label>
@@ -63,7 +63,7 @@ const LoginPage = () => {
               name="password"
               id="password"
               placeholder="Escribe tu contraseña"
-              className="w-full px-3 py-2 border rounded"
+              className="input"
               {...register("password", { required: true, minLength: 6 })}
             />
             {errors.password?.message && (
@@ -74,14 +74,14 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 my-3"
+            className="button"
           >
             Login
           </button>
         </form>
-        <p className="flex gap-x-2 justify-between mt-1 text-sm">
+        <p className="footer-text">
           No tienes una cuenta?{" "}
-          <Link to="/register" className="text-sky-500">
+          <Link to="/register" className="footer-link">
             Crear nueva
           </Link>
         </p>

@@ -1,11 +1,8 @@
-/* Navbar general */
 .navbar {
-    background-color: #3f3f46; /* bg-zinc-700 */
-    margin: 0.75rem 0; /* my-3 */
-    display: flex; /* flex */
-    justify-content: space-between; /* justify-between */
-    padding: 1.25rem 2.5rem; /* py-5 px-10 */
-    border-radius: 0.5rem; /* rounded-lg */
+    background-color: #3f3f46;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
 }
 
 /* Título */
