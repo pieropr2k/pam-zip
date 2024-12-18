@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { getRecipeInfo } from '../middlewares/getRecipe.middleware.js';
 
 export const getInfoById = async (req, res) => {
     const { id } = req.params;
     try {
         //const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
         const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        
         const meal = response.data.meals[0];
         //console.log(response.data);
         const {strArea, strMeal, strMealThumb, strInstructions, strYoutube} = meal; 
@@ -31,7 +31,6 @@ export const getInfoById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 export const getRecipeByName = async(req,res) => {
     const {name} = req.params
@@ -91,19 +90,33 @@ export const getAllInfo = async (req, res) => {
 */
 
 export const getCategory = async (req, res) => {
-    const {category} = req.params
-
+    const {category} = req.params; 
+    //console.log(category, "cat");
+    let recipes;
     try {
-        const response = await fetch(`http://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
-        const data = await response.json()
-
-        const recipes = data.meals.map((meal) => {
-            return {
-                id: meal.idMeal,
-                name: meal.strMeal,
-                img: meal.strMealThumb
-            }
-        })
+        if (category === 'All') {         
+            const recipesId = ['52978', '53049', '53071', '52855', '52776', '52785', '52907', '52791', '52802'];
+            recipes = await Promise.all(
+                recipesId.map(async (id_num) => {
+                    const res = await getRecipeInfo(id_num);
+                    const {id, name, img} = res;
+                    return {
+                        id, name, img
+                    }         
+                })
+            );
+        } else {
+            const response = await fetch(`http://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+            //console.log(response);
+            const data = await response.json()
+            recipes = data.meals.map((meal) => {
+                return {
+                    id: meal.idMeal,
+                    name: meal.strMeal,
+                    img: meal.strMealThumb
+                }
+            })
+        }
         // console.log(data.meals[0].strMeal,data.meals[0].strMealThumb)
         res.json(recipes)
 

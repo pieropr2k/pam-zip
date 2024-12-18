@@ -8,9 +8,10 @@
 .app-container {
   height: auto;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  background-color: rgb(61, 60, 64);
+  background-color: rgb(81, 79, 89);
   min-height: 100vh;  
 }
 

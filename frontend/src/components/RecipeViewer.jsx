@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import AppContext from '../components/context/AppContext'
-import '../css/components-css/RecipeViewer.css'
-import { useRecipes } from '../context/RecipesContext'
+import '../css/components-css/RecipeViewer.css';
+import { useRecipes } from '../context/RecipesContext';
 
 const RecipeViewer = () => {
   const { isMenu, setIsMenu } = useContext(AppContext)
@@ -42,7 +42,7 @@ const RecipeViewer = () => {
   }
 
   return (
-    <div className="recipe-container">
+    <div className="info-container">
       <p>
         <Link to='/' className='back-link'>Volver</Link>
       </p>

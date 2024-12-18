@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react';
 import '../css/components-css/RecipeContainer.css';
-import '../css/components-css/Search.css';
 import { useFavorites } from '../context/FavoritesContext';
 import RecipeCard from '../components/RecipeCard';
 import AppContext from '../components/context/AppContext';
@@ -18,13 +17,13 @@ const FavoritesPage = () => {
     }, []);
 
     return (
-        <>
+        <div className='info-container'>
             <p>
                 <Link to="/" className="back-link">
                     Volver
                 </Link>
             </p> 
-            <h1>Mis Favoritos:</h1>
+            <h1 className='fav-title'>Mis Favoritos:</h1>
             <main className='recipes-container'>
                 {favorites.length === 0 
                 ? <p>No hay favoritos en tu lista, agrega unos...</p>
@@ -37,7 +36,7 @@ const FavoritesPage = () => {
                     ))
                 )}
             </main>
-        </>
+        </div>
     );
 };
 

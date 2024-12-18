@@ -16,7 +16,7 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
     const { recipes, getRecipesByCategory, getRecipeByName }= useRecipes(); 
 
     useEffect(() => {
-        if (isMenu) {
+        if (!isMenu) {
             setIsMenu(true)
         }
         if (recipeSearch === '') {

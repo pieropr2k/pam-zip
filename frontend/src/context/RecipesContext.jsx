@@ -18,6 +18,11 @@ export function RecipesProvider({ children }) {
 
   const getRecipesByCategory = async (category, recipesId = []) => {
     try {
+      const res = await getRecipesRequest(category);
+      const recipesList = res.data;
+      //console.log(recipesList, "api recipes");
+      setRecipes(recipesList);
+      /*
         if (category !== 'All') {
             const res = await getRecipesRequest(category);
             const recipesList = res.data;
@@ -34,7 +39,7 @@ export function RecipesProvider({ children }) {
             //console.log(recipesList, "prov")
             setRecipes(recipesList);
         }
-      
+      */
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
