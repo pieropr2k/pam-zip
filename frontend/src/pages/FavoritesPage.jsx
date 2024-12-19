@@ -22,19 +22,19 @@ const FavoritesPage = () => {
                 <Link to="/" className="back-link">
                     Volver
                 </Link>
-            </p> 
+            </p>
             <h1 className='fav-title'>Mis Favoritos:</h1>
             <main className='recipes-container'>
-                {favorites.length === 0 
-                ? <p>No hay favoritos en tu lista, agrega unos...</p>
-                : (
-                    favorites.map((recipe, index) => (
-                        <RecipeCard
-                            key={index}
-                            recipe={recipe}
-                        />
-                    ))
-                )}
+                {favorites.length === 0
+                    ? <p>No hay favoritos en tu lista, agrega unos...</p>
+                    : (
+                        favorites.map((recipe, index) => (
+                            <RecipeCard
+                                key={index}
+                                recipe={recipe}
+                            />
+                        ))
+                    )}
             </main>
         </div>
     );

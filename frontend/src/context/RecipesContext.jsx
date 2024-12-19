@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import {
-    getRecipesRequest,
-    getOneRecipeRequest,
-    getRecipeByNameRequest
+  getRecipesRequest,
+  getOneRecipeRequest,
+  getRecipeByNameRequest
 } from "../api/recipes";
 
 const RecipesContext = createContext();
@@ -25,7 +25,7 @@ export function RecipesProvider({ children }) {
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
-  }; 
+  };
 
   const getOneRecipe = async (id) => {
     try {
@@ -43,7 +43,7 @@ export function RecipesProvider({ children }) {
     } catch (error) {
       console.error("Error fetching recipe:", error);
     }
-  }; 
+  };
 
   return (
     <RecipesContext.Provider

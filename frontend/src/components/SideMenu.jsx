@@ -5,12 +5,10 @@ import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
 
 const SideMenu = ({ CategorySelected, setCategorySelected }) => {
-
   const categories = ['All', 'Dessert', 'Pasta', 'Seafood', 'Starter', 'Vegetarian', 'Breakfast']
 
   const {isMenu} = useContext(AppContext)
   const {logout} = useAuth();
-
 
   const showMenu = ()=> {
     document.querySelector('.categories-container').classList.toggle('active')

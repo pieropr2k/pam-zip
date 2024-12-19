@@ -1,17 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
 import RecipeCard from "./RecipeCard"
 //import SearchCard from "./SearchCard"
-import "../css/components-css/RecipeContainer.css" 
+import "../css/components-css/RecipeContainer.css"
 import { useRecipes } from '../context/RecipesContext'
 import AppContext from './context/AppContext'
 
-const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelected  }) => {
+const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelected }) => {
     const [recipesSearched, setRecipesSearched] = useState({
         name: '',
         img: ''
     })
     const { isMenu, setIsMenu } = useContext(AppContext);
-    const { recipes, getRecipesByCategory, getRecipeByName }= useRecipes(); 
+    const { recipes, getRecipesByCategory, getRecipeByName } = useRecipes();
 
     useEffect(() => {
         if (!isMenu) {
@@ -22,19 +22,19 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
                 name: '',
                 img: ''
             });
-        } else { 
+        } else {
             const getRecipeSearched = async () => {
                 const recipe = await getRecipeByName(recipeSearch);
                 const { strMeal, strMealThumb } = recipe;
-                    setRecipesSearched({ 
-                        name: strMeal,
-                        img: strMealThumb
-                    });
-            } 
+                setRecipesSearched({
+                    name: strMeal,
+                    img: strMealThumb
+                });
+            }
 
             const handleEnter = (e) => {
                 if (e.key === 'Enter') {
-                    getRecipeSearched() 
+                    getRecipeSearched()
                 }
             }
 
@@ -49,33 +49,33 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
 
     useEffect(() => {
         getRecipesByCategory(CategorySelected);
-    }, [CategorySelected]); 
+    }, [CategorySelected]);
 
     if (recipeSearch === '' && CategorySelected === 'All') {
         return (
             <main className='recipes-container'>
-                { 
-                recipes.map((recipe, index) => (
-                    <RecipeCard
-                        key={index}
-                        recipe={recipe}
-                    />
-                ))
+                {
+                    recipes.map((recipe, index) => (
+                        <RecipeCard
+                            key={index}
+                            recipe={recipe}
+                        />
+                    ))
                 }
             </main>
         )
-    } else if (recipeSearch !== '') { 
-        setCategorySelected('All'); 
-        return (
-            <main className='recipes-container'> 
-                <RecipeCard recipe={recipesSearched}/> 
-            </main>
-        );
-    }else { 
+    } else if (recipeSearch !== '') {
+        setCategorySelected('All');
         return (
             <main className='recipes-container'>
-                {recipes.map((o, index) => ( 
-                    <RecipeCard key={index} recipe={o}/> 
+                <RecipeCard recipe={recipesSearched} />
+            </main>
+        );
+    } else {
+        return (
+            <main className='recipes-container'>
+                {recipes.map((o, index) => (
+                    <RecipeCard key={index} recipe={o} />
                 ))}
             </main>
         )

@@ -18,12 +18,11 @@ import RecipeInfoPage from './pages/RecipeInfoPage.jsx'
 
 const ShowNavbar = () => {
   const { isAuthenticated } = useAuth();
-  // Obtén el estado de autenticación
   return isAuthenticated ? null : (<Navbar />);
 
 }
 
-const ShowSideMenu = ({CategorySelected, setCategorySelected}) => {
+const ShowSideMenu = ({ CategorySelected, setCategorySelected }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? (<SideMenu
     CategorySelected={CategorySelected}
@@ -36,7 +35,7 @@ const AppContent = ({ CategorySelected, setCategorySelected, formState, onInputC
 
   return <div className={`app-container ${!isAuthenticated ? 'flex-col' : 'flex-row'}`}>
     <ShowNavbar />
-    <ShowSideMenu CategorySelected={CategorySelected} setCategorySelected={setCategorySelected}/>
+    <ShowSideMenu CategorySelected={CategorySelected} setCategorySelected={setCategorySelected} />
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
@@ -71,14 +70,14 @@ const AppContent = ({ CategorySelected, setCategorySelected, formState, onInputC
 const App = () => {
   const [CategorySelected, setCategorySelected] = useState("All");
   const { formState, onInputChange } = useForm({ recipe: '' });
-  
+
   return (
     <AuthProvider>
       <RecipesProvider>
         <AppState>
           <FavoritesProvider>
             <Router>
-              <AppContent CategorySelected={CategorySelected} setCategorySelected={setCategorySelected} formState={formState} onInputChange={onInputChange}/>
+              <AppContent CategorySelected={CategorySelected} setCategorySelected={setCategorySelected} formState={formState} onInputChange={onInputChange} />
             </Router>
           </FavoritesProvider>
         </AppState>

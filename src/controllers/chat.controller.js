@@ -1,6 +1,5 @@
 import OpenAI from 'openai'
 import dotenv from 'dotenv'
- 
 dotenv.config()
 
 const openai = new OpenAI({
@@ -8,7 +7,6 @@ const openai = new OpenAI({
 }); 
 
 export const handleResponse = async (req, res) => {
-    console.log("chatt")
     const { prompt, name } = req.body
 
     if (!prompt) {

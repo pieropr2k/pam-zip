@@ -66,7 +66,7 @@ export const verifyToken = async (req, res) => {
         const decoded = jwt.verify(token, TOKEN_SECRET);
 
         // Buscar usuario por ID
-        const userFound = await User.findByPk(decoded.id); // `findByPk` busca por clave primaria
+        const userFound = await User.findByPk(decoded.id);
         if (!userFound) return res.sendStatus(401);
 
         res.json({ id: userFound.id, username: userFound.username, email: userFound.email });
@@ -78,9 +78,9 @@ export const verifyToken = async (req, res) => {
 export const logout = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Solo 'secure' en producción
+        secure: process.env.NODE_ENV === 'production',
         expires: new Date(0),
-        sameSite: 'Strict', // Puede ser útil para evitar problemas de cross-site
+        sameSite: 'Strict'
     });
     return res.sendStatus(200);
 };

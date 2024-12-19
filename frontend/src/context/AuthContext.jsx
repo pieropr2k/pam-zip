@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     checkLogin();
     //console.log('after');
   }, []);
-  
+
   return (
     <AuthContext.Provider
       value={{
