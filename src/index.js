@@ -5,6 +5,7 @@ import morgan from "morgan"
 import cookieParser from "cookie-parser";
 import recipesRoutes from "./routes/recipes.routes.js"
 import favoritesRoutes from "./routes/favorites.routes.js"
+import chatRoutes from "./routes/chat.routes.js"
 import authRoutes from "./routes/auth.routes.js";
 import { sequelize } from "./database/database.js";
 import { FRONTEND_URL } from "./config.js";
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use("/api/auth", authRoutes);
 app.use("/api", recipesRoutes);
 app.use("/api", favoritesRoutes);
+app.use("/api", chatRoutes);
 
 await sequelize.sync({force: false});
 

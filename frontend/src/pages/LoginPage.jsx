@@ -33,9 +33,9 @@ const LoginPage = () => {
             {error}
           </div>
         )}
-        <h1 className="">Entrar</h1>
+        <h1>Entrar</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div>
             <label htmlFor="email" className="label">
               Email:
             </label>
@@ -48,10 +48,10 @@ const LoginPage = () => {
               {...register("email", { required: true })}
             />
             {errors.email?.message && (
-              <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
+              <p className="warning">{errors.email?.message}</p>
             )}
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="password"
               className="label"
@@ -67,7 +67,7 @@ const LoginPage = () => {
               {...register("password", { required: true, minLength: 6 })}
             />
             {errors.password?.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="warning">
                 {errors.password?.message}
               </p>
             )}

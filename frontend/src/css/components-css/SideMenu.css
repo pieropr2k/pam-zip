@@ -63,8 +63,9 @@
 .hide {
   position: absolute; 
   left: -100%;        
-  width: 0;           
-  overflow: hidden;   
+  width: 0;
+  height: 0px!important;          
+  overflow: hidden!important;   
   transition: all 0.3s ease; 
 }
 

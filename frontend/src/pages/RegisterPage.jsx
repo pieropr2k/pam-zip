@@ -31,9 +31,9 @@ const RegisterPage = () => {
             {error}
           </div>
         )}
-        <h1 className="text-3xl font-bold mb-6">Registrar</h1>
+        <h1>Registrar</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div>
             <label htmlFor="username" className="label">
               Username:
             </label>
@@ -47,12 +47,12 @@ const RegisterPage = () => {
               autoFocus
             />
             {errors.username?.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="warning">
                 {errors.username?.message}
               </p>
             )}
           </div>
-          <div className="mb-4">
+          <div>
             <label htmlFor="email" className="label">
               Email:
             </label>
@@ -65,12 +65,12 @@ const RegisterPage = () => {
               {...register("email")}
             />
             {errors.email?.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="warning">
                 {errors.email?.message}
               </p>
             )}
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="password"
               className="label"
@@ -86,12 +86,12 @@ const RegisterPage = () => {
               {...register("password")}
             />
             {errors.password?.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="warning">
                 {errors.password?.message}
               </p>
             )}
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="confirmPassword"
               className="label"
@@ -107,7 +107,7 @@ const RegisterPage = () => {
               {...register("confirmPassword")}
             />
             {errors.confirmPassword?.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="warning">
                 {errors.confirmPassword?.message}
               </p>
             )}

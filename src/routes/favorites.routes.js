@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import {
     createFavoriteRecipe,
     getAllFavoriteRecipes,
@@ -6,7 +6,7 @@ import {
 } from '../controllers/favorites.controller.js';
 import { auth } from '../middlewares/auth.middleware.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/favorites', auth, createFavoriteRecipe);
 router.get('/favorites', auth, getAllFavoriteRecipes);

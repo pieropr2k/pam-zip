@@ -10,9 +10,7 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
         name: '',
         img: ''
     })
-    const { isMenu, setIsMenu } = useContext(AppContext)
- 
-    const [recipesId, setRecipesId] = useState([]);
+    const { isMenu, setIsMenu } = useContext(AppContext);
     const { recipes, getRecipesByCategory, getRecipeByName }= useRecipes(); 
 
     useEffect(() => {
@@ -24,7 +22,6 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
                 name: '',
                 img: ''
             });
-            setRecipesId([]);
         } else { 
             const getRecipeSearched = async () => {
                 const recipe = await getRecipeByName(recipeSearch);
@@ -51,31 +48,20 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
     }, [recipeSearch]);
 
     useEffect(() => {
-        getRecipesByCategory(CategorySelected, recipesId);
-    }, [CategorySelected, recipesId]); 
-    
-    useEffect(() => {
-        if (recipeSearch === '' && CategorySelected === 'All') {
-            const recipesIdList = ['52978', '53049', '53071', '52855', '52776', '52785', '52907', '52791', '52802'];
-            setRecipesId(recipesIdList);
-        } else {
-            setRecipesId([]);
-        }
-    }, [recipeSearch, CategorySelected]); 
+        getRecipesByCategory(CategorySelected);
+    }, [CategorySelected]); 
 
-    //Return Render
     if (recipeSearch === '' && CategorySelected === 'All') {
-        //const NameRecipes = ['Kumpir', 'apam', 'asado', 'banana', 'gateau', 'fry', 'confit', 'eton', 'fish pie'] 
         return (
             <main className='recipes-container'>
-                {
-                //recipesId.map((name, index) => (
-                recipes.map((recipe) => (
+                { 
+                recipes.map((recipe, index) => (
                     <RecipeCard
-                        key={recipe.id}
+                        key={index}
                         recipe={recipe}
                     />
-                ))}
+                ))
+                }
             </main>
         )
     } else if (recipeSearch !== '') { 
@@ -84,7 +70,7 @@ const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelec
             <main className='recipes-container'> 
                 <RecipeCard recipe={recipesSearched}/> 
             </main>
-        )
+        );
     }else { 
         return (
             <main className='recipes-container'>

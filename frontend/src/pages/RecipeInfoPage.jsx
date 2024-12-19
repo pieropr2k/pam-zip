@@ -1,10 +1,11 @@
-import React, { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import AppContext from '../components/context/AppContext'
 import '../css/components-css/RecipeViewer.css';
+import AppContext from '../components/context/AppContext';
 import { useRecipes } from '../context/RecipesContext';
+import { Assistant } from '../components/Assistant';
 
-const RecipeViewer = () => {
+const RecipeInfoPage = () => {
   const { isMenu, setIsMenu } = useContext(AppContext)
   const { getOneRecipe } = useRecipes();
 
@@ -82,10 +83,15 @@ const RecipeViewer = () => {
             Ver en YouTube
           </a>
         </div>
+        <div className='recipe-assistant'>
+            <Assistant
+              name={recipeData.name}
+            />
+        </div> 
 
       </div>
     </div>
   )
 }
 
-export default RecipeViewer
+export default RecipeInfoPage;

@@ -4,7 +4,6 @@ import {
   deleteFavoriteRequest,
   getFavoritesRequest
 } from "../api/favorites";
-import { getOneRecipeRequest } from "../api/recipes";
 
 const FavoritesContext = createContext();
 
@@ -20,16 +19,8 @@ export function FavoritesProvider({ children }) {
   const getFavorites = async () => {
     try {
       const res = await getFavoritesRequest();
-      
-      const favoritesList = res.data
-      //.map(async (favorite) => await getOneRecipeRequest(favorite));
-      console.log(favoritesList, "api favs");
-      /*
-      console.log(await Promise.all(favoritesID.map(async (favorite) => {
-        const recipe = await getOneRecipeRequest(favorite)
-        return recipe.data
-    })));
-    */
+      const favoritesList = res.data;
+      //console.log(favoritesList, "api favs");
       setFavorites(favoritesList);
     } catch (error) {
       console.error("Error fetching favorites:", error);
@@ -51,8 +42,7 @@ export function FavoritesProvider({ children }) {
     console.log(favorite)
     try {
       const res = await addFavoriteRequest(favorite);
-      console.log("Favorite created:", res.data);
-      // Optionally add the new favorite to the state
+      //console.log("Favorite created:", res.data);
       setFavorites((prevFavorites) => [...prevFavorites, res.data]);
     } catch (error) {
       console.error("Error creating favorite:", error);

@@ -1,12 +1,12 @@
-import axios from 'axios';
 import { getRecipeInfo } from '../middlewares/getRecipe.middleware.js';
 
 export const getInfoById = async (req, res) => {
     const { id } = req.params;
     try {
-        //const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-        const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const meal = response.data.meals[0];
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const data = await response.json()
+
+        const meal = data.meals[0];
         //console.log(response.data);
         const {strArea, strMeal, strMealThumb, strInstructions, strYoutube} = meal; 
         if (!meal) {
@@ -50,44 +50,6 @@ export const getRecipeByName = async(req,res) => {
     }
 
 }
-
-/*
-export const getAllInfo = async (req, res) => {
-    const { nameRecipe } = req.params
-
-    try {
-        const request = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${nameRecipe}`)
-        const data = await request.json()
-
-            const meal = data.meals[0]
-      
-            const ingredients = []
-            for (let i = 1; i <= 20; i++) {
-                const ingredient = meal[`strIngredient${i}`]
-                const measure = meal[`strMeasure${i}`]
-                if (ingredient && ingredient.trim() !== "") {
-                    ingredients.push({
-                        ingredient: ingredient.trim(),
-                        measure: measure ? measure.trim() : "",
-                    })
-                }
-            }
-            const img = meal['strMealThumb']
-
-            const response = {
-                instructions: meal.strInstructions,
-                youtubeLink: meal.strYoutube,
-                ingredients,
-                img: img
-            }
-
-           res.json(response)
-      
-    } catch (error) {
-        console.error(error)
-    }
-}
-*/
 
 export const getCategory = async (req, res) => {
     const {category} = req.params; 
