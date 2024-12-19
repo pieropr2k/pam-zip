@@ -5,35 +5,31 @@
     padding: 1.75rem 2.5rem;
 }
 
-/* Título */
 .navbar h1 {
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: bold; /* font-bold */
-    color: white; /* Por defecto, texto blanco */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
 }
 
-/* Lista de navegación */
 .navbar .buttons {
-    display: flex; /* flex */
-    gap: 0.5rem; /* gap-x-2 */
-    list-style: none; /* Eliminar estilo de lista */
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Enlaces dentro de la lista */
 .navbar .buttons li a {
-    background-color: #6366f1; /* bg-indigo-500 */
-    padding: 0.25rem 1rem; /* px-4 py-1 */
-    border-radius: 0.375rem; /* rounded-md */
-    color: white; /* Texto blanco */
-    text-decoration: none; /* Quitar subrayado */
+    background-color: #6366f1;
+    padding: 0.25rem 1rem;
+    border-radius: 0.375rem;
+    color: white;
+    text-decoration: none;
     display: inline-block;
     text-align: center;
-    font-size: 1rem; /* Tamaño base del texto */
+    font-size: 1rem;
 }
 
-/* Hover en los enlaces */
 .navbar .buttons li a:hover {
-    background-color: #4f46e5; /* Un poco más oscuro que indigo-500 */
+    background-color: #4f46e5;
 }
