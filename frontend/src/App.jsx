@@ -15,7 +15,6 @@ import FavoritesPage from './pages/FavoritesPage.jsx'
 import { RecipesProvider } from './context/RecipesContext.jsx'
 import { Navbar } from './components/Navbar.jsx'
 import RecipeInfoPage from './pages/RecipeInfoPage.jsx'
-
 const ShowNavbar = () => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? null : (<Navbar />);
