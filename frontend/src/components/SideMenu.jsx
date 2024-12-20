@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import AppContext from '../components/context/AppContext.jsx'
+import AppContext from './context/AppContext.jsx'
 import "../css/components-css/SideMenu.css"
 import { useAuth } from '../context/AuthContext.jsx'
 import { Link } from 'react-router-dom'
