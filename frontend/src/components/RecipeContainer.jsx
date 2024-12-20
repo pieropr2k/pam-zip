@@ -3,7 +3,7 @@ import RecipeCard from "./RecipeCard"
 //import SearchCard from "./SearchCard"
 import "../css/components-css/RecipeContainer.css"
 import { useRecipes } from '../context/RecipesContext.jsx'
-import AppContext from './context/AppContext.jsx'
+import AppContext from './context/AppContext.js'
 
 const RecipeContainer = ({ recipeSearch = '', CategorySelected, setCategorySelected }) => {
     const [recipesSearched, setRecipesSearched] = useState({

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "../schemas/auth,js";
+import { loginSchema } from "../schemas/auth.js";
 import "../css/components-css/AuthForms.css";
 
 const LoginPage = () => {

@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import '../css/components-css/RecipeContainer.css';
 import { useFavorites } from '../context/FavoritesContext.jsx';
 import RecipeCard from '../components/RecipeCard.jsx';
-import AppContext from '../components/context/AppContext.jsx';
+import AppContext from '../components/context/AppContext.js';
 import { Link } from 'react-router-dom';
 
 const FavoritesPage = () => {
