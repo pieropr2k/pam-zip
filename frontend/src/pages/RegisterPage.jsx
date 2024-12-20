@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { registerSchema } from "../schemas/auth";
+import { registerSchema } from "../schemas/auth.js";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext.jsx"; 
 import "../css/components-css/AuthForms.css";
 
 const RegisterPage = () => {

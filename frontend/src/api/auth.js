@@ -1,4 +1,4 @@
-import axios from "./axios";
+import axios from "./axios.js";
 
 export const registerRequest = async (user) => axios.post(`/auth/register`, user);
 //  axios.post(`/auth/register`, user);

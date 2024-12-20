@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import "../css/components-css/RecipeCard.css"
-import { useFavorites } from '../context/FavoritesContext'
+import { useFavorites } from '../context/FavoritesContext.jsx'
 
 const RecipeCard = ({ recipe }) => {
   const { id, name, img } = recipe;

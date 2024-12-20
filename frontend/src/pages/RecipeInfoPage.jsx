@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../css/components-css/RecipeViewer.css';
-import AppContext from '../components/context/AppContext';
-import { useRecipes } from '../context/RecipesContext';
-import { Assistant } from '../components/Assistant';
+import AppContext from '../components/context/AppContext.jsx';
+import { useRecipes } from '../context/RecipesContext.jsx';
+import { Assistant } from '../components/Assistant.jsx';
 
 const RecipeInfoPage = () => {
     const { isMenu, setIsMenu } = useContext(AppContext)
